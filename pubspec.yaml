@@ -1,0 +1,26 @@
+name: aws_s3_upload_lite
+description: A simple, convenient package for uploading to AWS S3.
+version: 0.0.1
+homepage: https://github.com/Yoda-Man/aws_s3_upload_lite
+
+environment:
+  sdk: '>=3.2.6 <4.0.0'
+  flutter: ">=3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  amazon_cognito_identity_dart_2: 
+  http: 
+  path: 
+  recase: 
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+# The following section is specific to Flutter.
+flutter: null
