@@ -113,11 +113,10 @@ class AwsS3 {
     try {
       final res = await req.send();
 
-      if (res.statusCode == 204) return '$endpoint/$uploadKey';
+      return res.statusCode.toString();
     } catch (e) {
-      print('Failed to upload to AWS, with exception:');
       print(e);
-      return null;
+      return 'Failed to upload to AWS, with exception:';
     }
   }
 
