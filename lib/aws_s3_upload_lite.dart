@@ -27,21 +27,21 @@ class AwsS3 {
     /// The file to upload
     required File file,
 
-    /// The key to save this file as. Will override destDir and filename if set.
-    String? key,
+    /// The AWS region. Must be formatted correctly, e.g. us-west-1
+    required String region,
 
     /// The path to upload the file to (e.g. "uploads/public"). Defaults to the root "directory"
-    String destDir = '',
+    required String destDir,
 
-    /// The AWS region. Must be formatted correctly, e.g. us-west-1
-    String region = 'us-east-2',
+    /// The filename to upload as.
+    required String filename,
+
+    /// The key to save this file as. Will override destDir and filename if set.
+    String? key,
 
     /// Access control list enables you to manage access to bucket and objects
     /// For more information visit [https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html]
     ACL acl = ACL.public_read,
-
-    /// The filename to upload as. If null, defaults to the given file's current filename.
-    String? filename,
 
     /// The content-type of file to upload. defaults to binary/octet-stream.
     String contentType = 'binary/octet-stream',
@@ -63,9 +63,9 @@ class AwsS3 {
     if (key != null) {
       uploadKey = key;
     } else if (destDir.isNotEmpty) {
-      uploadKey = '$destDir/${filename ?? path.basename(file.path)}';
+      uploadKey = '$destDir/$filename';
     } else {
-      uploadKey = '${filename ?? path.basename(file.path)}';
+      uploadKey = '$filename';
     }
 
     final stream = http.ByteStream(Stream.castFrom(file.openRead()));

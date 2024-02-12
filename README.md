@@ -1,12 +1,12 @@
 # aws_s3_upload_lite
 
-A simple, convenient package for uploading to AWS S3.
+A simple, convenient package for uploading files to AWS S3.
 
 Inspired by aws_s3_upload
 
 ## Getting Started
 
-Having created credentials on AWS, upload a file like so:
+Having created credentials on AWS, you can upload a file like this:
 
 ```dart
 AwsS3.uploadFile(
@@ -15,6 +15,8 @@ AwsS3.uploadFile(
   file: File("path_to_file"),
   bucket: "bucket_name",
   region: "us-east-2",
+  destDir: "", // The path to upload the file to (e.g. "uploads/public"). Defaults to the root "directory"
+  filename: "x.png", //The filename to upload as
   metadata: {"test": "test"} // optional
 );
 ```

@@ -1,5 +1,5 @@
 name: aws_s3_upload_lite
-description: A simple, convenient package for uploading to AWS S3.
+description: A simple, convenient package for uploading files to AWS S3.
 version: 0.0.2
 homepage: https://github.com/Yoda-Man/aws_s3_upload_lite
 
