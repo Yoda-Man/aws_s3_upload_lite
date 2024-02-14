@@ -21,6 +21,21 @@ AwsS3.uploadFile(
 );
 ```
 
+or 
+
+```dart
+AwsS3.uploadUint8List(
+  accessKey: "AKxxxxxxxxxxxxx",
+  secretKey: "xxxxxxxxxxxxxxxxxxxxxxxxxx",
+  file: fileBytes, //Uint8List fileBytes
+  bucket: "bucket_name",
+  region: "us-east-2",
+  destDir: "", // The path to upload the file to (e.g. "uploads/public"). Defaults to the root "directory"
+  filename: "x.png", //The filename to upload as
+  metadata: {"test": "test"} // optional
+);
+```
+
 ## Motivation
 
 There are several Flutter plugins for interacting with AWS S3, this small library was built because the other packages are no longer well maintained.

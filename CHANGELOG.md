@@ -1,3 +1,7 @@
+## [0.0.4] - 2/12/2024
+
+Upload Uint8List has been added.
+
 ## [0.0.3] - 2/12/2024
 
 Update upload instructions.
