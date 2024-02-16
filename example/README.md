@@ -1,14 +1,18 @@
+# Example of usage `aws_s3_upload_lite`
+
+```dart
+
 import 'dart:io';
 
 import 'package:aws_s3_upload_lite/aws_s3_upload_lite.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  upload1();
-  upload2();
+  uploadbyfile();
+  uploadbyUint8List();
 }
 
-Future<void> upload1() async {
+Future<void> uploadbyfile() async {
   String response = await AwsS3.uploadFile(
       accessKey: "AKxxxxxxxxxxxxx",
       secretKey: "xxxxxxxxxxxxxxxxxxxxxxxxxx",
@@ -22,7 +26,7 @@ Future<void> upload1() async {
   debugPrint(response);
 }
 
-Future<void> upload2() async {
+Future<void> uploadbyUint8List() async {
   String response = await AwsS3.uploadUint8List(
       accessKey: "AKxxxxxxxxxxxxx",
       secretKey: "xxxxxxxxxxxxxxxxxxxxxxxxxx",
@@ -35,3 +39,5 @@ Future<void> upload2() async {
 
   debugPrint(response);
 }
+
+```

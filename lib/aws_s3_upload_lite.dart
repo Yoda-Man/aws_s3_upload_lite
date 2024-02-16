@@ -14,7 +14,7 @@ import './src/policy.dart';
 
 /// Convenience class for uploading files to AWS S3
 class AwsS3 {
-  /// Upload a file, returning the file's public URL on success.
+  /// Upload a file, returning the status code 200/204 on success.
   static Future<String> uploadFile({
     /// AWS access key
     required String accessKey,
@@ -141,7 +141,7 @@ class AwsS3 {
     return List<int>.from(data);
   }
 
-  /// Upload a Uint8List, returning the file's public URL on success.
+  /// Upload a Uint8List, returning the status code 200/204 on success.
   static Future<String> uploadUint8List({
     /// AWS access key
     required String accessKey,
@@ -184,6 +184,7 @@ class AwsS3 {
     if (useSSL) {
       httpStr += 's';
     }
+
     final endpoint = '$httpStr://$bucket.s3.$region.amazonaws.com';
 
     String? uploadKey;

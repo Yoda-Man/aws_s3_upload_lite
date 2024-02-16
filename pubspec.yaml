@@ -1,6 +1,6 @@
 name: aws_s3_upload_lite
 description: Amazon S3 is an object storage service that stores data as objects within buckets. aws_s3_upload_lite is a simple, convenient package for uploading files to AWS S3 buckets.
-version: 0.0.6
+version: 0.0.7
 homepage: https://github.com/Yoda-Man/aws_s3_upload_lite
 
 environment:
