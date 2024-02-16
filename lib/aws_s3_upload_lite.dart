@@ -136,10 +136,12 @@ class AwsS3 {
     return updatedMetadata;
   }
 
+  /// A method to convert File To Cast
   static convertFileToCast(Uint8List data) {
     return List<int>.from(data);
   }
 
+  /// Upload a Uint8List, returning the file's public URL on success.
   static Future<String> uploadUint8List({
     /// AWS access key
     required String accessKey,

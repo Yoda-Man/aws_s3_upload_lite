@@ -1,3 +1,7 @@
+## [0.0.5] - 2/16/2024
+
+Updated description in pubspec.yaml.
+
 ## [0.0.4] - 2/12/2024
 
 Upload Uint8List has been added.
