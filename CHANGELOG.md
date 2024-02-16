@@ -1,3 +1,7 @@
+## [0.0.6] - 2/16/2024
+
+Added Example.
+
 ## [0.0.5] - 2/16/2024
 
 Updated description in pubspec.yaml.
