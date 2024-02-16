@@ -1,6 +1,6 @@
 # aws_s3_upload_lite
 
-A simple, convenient package for uploading files to AWS S3.
+Amazon S3 is an object storage service that stores data as objects within buckets. An object is a file and any metadata that describes the file. aws_s3_upload_lite is a simple, convenient package for uploading files to AWS S3 buckets.
 
 Inspired by aws_s3_upload
 
