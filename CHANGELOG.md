@@ -1,3 +1,7 @@
+## [0.0.8]
+
+Updated dependencies.
+
 ## [0.0.7] - 2/16/2024
 
 Fixed Example.
