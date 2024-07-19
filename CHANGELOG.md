@@ -1,3 +1,7 @@
+## [0.1.0]
+
+Updated dependencies. Improved error handling
+
 ## [0.0.9]
 
 Updated dependencies.
