@@ -1,3 +1,12 @@
+## [0.1.3]
+Change new upload method with upload progress
+
+## [0.1.2]
+Added new upload method with upload progress
+
+## [0.1.1]
+Increased upload time to cater for slow upload speeds
+
 ## [0.1.0]
 
 Updated dependencies. Improved error handling
