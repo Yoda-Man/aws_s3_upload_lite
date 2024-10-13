@@ -1,3 +1,6 @@
+## [0.1.4]
+Upload with progress Documentation. Updated dependencies
+
 ## [0.1.3]
 Change new upload method with upload progress
 

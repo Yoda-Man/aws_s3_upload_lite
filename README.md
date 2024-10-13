@@ -35,6 +35,26 @@ AwsS3.uploadUint8List(
   metadata: {"test": "test"} // optional
 );
 ```
+or with a onUploadProgress callback function to moniter upload progress 
+```dart
+  void setUploadProgress(int sentBytes, int totalBytes) {
+    debugPrint(
+        'Upload progress: ${progress.value} (${bytes.value}/${total.value})');
+  }
+
+
+
+  await AwsS3.upload(
+  accessKey: "AKxxxxxxxxxxxxx",
+  secretKey: "xxxxxxxxxxxxxxxxxxxxxxxxxx",
+  file: fileBytes, //Uint8List fileBytes
+  bucket: "bucket_name",
+  region: "us-east-2",
+  destDir: "", // The path to upload the file to (e.g. "uploads/public"). Defaults to the root "directory"
+  filename: "x.png", //The filename to upload as
+  metadata: {"test": "test"} // optional
+  onUploadProgress: setUploadProgress);
+```
 
 ## Motivation
 

@@ -40,4 +40,24 @@ Future<void> uploadbyUint8List() async {
   debugPrint(response);
 }
 
+//Upload with progress
+
+ void setUploadProgress(int sentBytes, int totalBytes) {
+    debugPrint(
+        'Upload progress: ${progress.value} (${bytes.value}/${total.value})');
+  }
+
+
+
+  await AwsS3.upload(
+  accessKey: "AKxxxxxxxxxxxxx",
+  secretKey: "xxxxxxxxxxxxxxxxxxxxxxxxxx",
+  file: fileBytes, //Uint8List fileBytes
+  bucket: "bucket_name",
+  region: "us-east-2",
+  destDir: "", // The path to upload the file to (e.g. "uploads/public"). Defaults to the root "directory"
+  filename: "x.png", //The filename to upload as
+  metadata: {"test": "test"} // optional
+  onUploadProgress: setUploadProgress);
+
 ```
