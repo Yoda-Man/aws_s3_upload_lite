@@ -14,7 +14,7 @@ import 'package:recase/recase.dart';
 import './src/policy.dart';
 import 'src/multipart_request.dart';
 
-late final void Function(int bytes, int totalBytes) onProgress;
+typedef OnUploadProgressCallback = void Function(int sentBytes, int totalBytes);
 
 /// Convenience class for uploading files to AWS S3
 class AwsS3 {
@@ -61,7 +61,7 @@ class AwsS3 {
     Map<String, String>? headers,
 
     /// On Upload Progress Callback Function
-    void Function(int, int)? onUploadProgress,
+    final OnUploadProgressCallback? onUploadProgress,
   }) async {
     try {
       var httpStr = 'http';
@@ -197,7 +197,7 @@ class AwsS3 {
     Map<String, String>? headers,
 
     /// On Upload Progress Callback Function
-    void Function(int, int)? onUploadProgress,
+    final OnUploadProgressCallback? onUploadProgress,
   }) async {
     try {
       var httpStr = 'http';
@@ -322,7 +322,7 @@ class AwsS3 {
       Map<String, String>? headers,
 
       /// On Upload Progress Callback Function
-      void Function(int, int)? onUploadProgress}) async {
+      final OnUploadProgressCallback? onUploadProgress}) async {
     try {
       var httpStr = 'http';
       if (useSSL) {
