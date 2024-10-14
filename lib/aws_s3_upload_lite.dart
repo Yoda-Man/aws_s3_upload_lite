@@ -27,6 +27,9 @@ class AwsS3 {
     /// AWS secret key
     required String secretKey,
 
+    /// AWS session Token
+    String? sessionToken,
+
     /// The name of the S3 storage bucket to upload  to
     required String bucket,
 
@@ -112,6 +115,10 @@ class AwsS3 {
       req.fields['X-Amz-Signature'] = signature;
       req.fields['Content-Type'] = contentType;
 
+      if(sessionToken != null){
+        req.fields['X-Amz-Security-Token'] = sessionToken;
+      }
+
       // If metadata isn't null, add metadata params to the request.
       if (metadata != null) {
         req.fields.addAll(metadataParams);
@@ -151,6 +158,9 @@ class AwsS3 {
 
     /// AWS secret key
     required String secretKey,
+
+    /// AWS session Token
+    String? sessionToken,
 
     /// The name of the S3 storage bucket to upload  to
     required String bucket,
@@ -239,7 +249,9 @@ class AwsS3 {
       req.fields['Policy'] = policy.encode();
       req.fields['X-Amz-Signature'] = signature;
       req.fields['Content-Type'] = contentType;
-
+      if(sessionToken != null){
+        req.fields['X-Amz-Security-Token'] = sessionToken;
+      }
       // If metadata isn't null, add metadata params to the request.
       if (metadata != null) {
         req.fields.addAll(metadataParams);
@@ -265,6 +277,9 @@ class AwsS3 {
 
       /// AWS secret key
       required String secretKey,
+
+      /// AWS session Token
+      String? sessionToken,
 
       /// The name of the S3 storage bucket to upload  to
       required String bucket,
@@ -366,6 +381,10 @@ class AwsS3 {
       req.fields['Policy'] = policy.encode();
       req.fields['X-Amz-Signature'] = signature;
       req.fields['Content-Type'] = contentType;
+
+      if(sessionToken != null){
+        req.fields['X-Amz-Security-Token'] = sessionToken;
+      }
 
       // If metadata isn't null, add metadata params to the request.
       if (metadata != null) {
