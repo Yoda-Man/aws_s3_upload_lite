@@ -8,13 +8,14 @@ class MultipartRequest extends http.MultipartRequest {
   MultipartRequest(
     String method,
     Uri url, {
-    required this.onProgress,
+    this.onProgress,
   }) : super(method, url);
 
-  final void Function(int bytes, int totalBytes) onProgress;
+  final void Function(int bytes, int totalBytes)? onProgress;
 
   /// Freezes all mutable fields and returns a single-subscription [ByteStream]
   /// that will emit the request body.
+  @override
   http.ByteStream finalize() {
     final byteStream = super.finalize();
 
@@ -22,9 +23,11 @@ class MultipartRequest extends http.MultipartRequest {
     int bytes = 0;
 
     final t = StreamTransformer.fromHandlers(
-      handleData: (List<int> data, EventSink<List<int>> sink) {
+      handleData:(List<int> data, EventSink<List<int>> sink) {
         bytes += data.length;
-        onProgress(bytes, total);
+        if(onProgress!=null) {
+          onProgress!(bytes, total);
+        }
         if (total >= bytes) {
           sink.add(data);
         }

@@ -15,7 +15,6 @@ import './src/policy.dart';
 import 'src/multipart_request.dart';
 
 typedef OnUploadProgressCallback = void Function(int sentBytes, int totalBytes);
-late final void Function(int bytes, int totalBytes) onProgress;
 
 /// Convenience class for uploading files to AWS S3
 class AwsS3 {
@@ -60,6 +59,12 @@ class AwsS3 {
 
     /// Additional metadata to be attached to the upload
     Map<String, String>? metadata,
+
+    /// Additional headers to be attached to the upload
+    Map<String, String>? headers,
+
+    /// On Upload Progress Callback Function
+    final OnUploadProgressCallback? onUploadProgress,
   }) async {
     try {
       var httpStr = 'http';
@@ -82,7 +87,7 @@ class AwsS3 {
       final length = await file.length();
 
       final uri = Uri.parse(endpoint);
-      final req = http.MultipartRequest("POST", uri);
+      final req = MultipartRequest("POST", uri, onProgress: onUploadProgress);
       final multipartFile = http.MultipartFile('file', stream, length,
           filename: path.basename(file.path));
 
@@ -122,6 +127,11 @@ class AwsS3 {
       // If metadata isn't null, add metadata params to the request.
       if (metadata != null) {
         req.fields.addAll(metadataParams);
+      }
+
+      // If headers isn't null, add headers to the request.
+      if (headers != null) {
+        req.headers.addAll(headers);
       }
 
       try {
@@ -192,6 +202,12 @@ class AwsS3 {
 
     /// Additional metadata to be attached to the upload
     Map<String, String>? metadata,
+
+    /// Additional headers to be attached to the upload
+    Map<String, String>? headers,
+
+    /// On Upload Progress Callback Function
+    final OnUploadProgressCallback? onUploadProgress,
   }) async {
     try {
       var httpStr = 'http';
@@ -217,7 +233,7 @@ class AwsS3 {
       final length = file.lengthInBytes;
 
       final uri = Uri.parse(endpoint);
-      final req = http.MultipartRequest("POST", uri);
+      final req = MultipartRequest("POST", uri, onProgress: onUploadProgress);
       final multipartFile =
           http.MultipartFile('file', stream, length, filename: filename);
 
@@ -255,6 +271,11 @@ class AwsS3 {
       // If metadata isn't null, add metadata params to the request.
       if (metadata != null) {
         req.fields.addAll(metadataParams);
+      }
+
+      // If headers isn't null, add headers to the request.
+      if (headers != null) {
+        req.headers.addAll(headers);
       }
 
       try {
@@ -312,8 +333,11 @@ class AwsS3 {
       /// Additional metadata to be attached to the upload
       Map<String, String>? metadata,
 
+      /// Additional headers to be attached to the upload
+      Map<String, String>? headers,
+
       /// On Upload Progress Callback Function
-      required OnUploadProgressCallback? onUploadProgress}) async {
+      final OnUploadProgressCallback? onUploadProgress}) async {
     try {
       var httpStr = 'http';
       if (useSSL) {
@@ -341,14 +365,7 @@ class AwsS3 {
       final req = MultipartRequest(
         "POST",
         uri,
-        onProgress: (int bytes, int total) {
-          final progress = bytes / total;
-          print('progress: $progress ($bytes/$total)');
-          if (onUploadProgress != null) {
-            onUploadProgress(bytes, total);
-            // CALL STATUS CALLBACK;
-          }
-        },
+        onProgress: onUploadProgress,
       );
       final multipartFile =
           http.MultipartFile('file', stream, length, filename: filename);
@@ -391,34 +408,13 @@ class AwsS3 {
         req.fields.addAll(metadataParams);
       }
 
-/*       int byteCount = 0;
-
-      var totalByteLength = req.contentLength; */
-
+      // If headers isn't null, add headers to the request.
+      if (headers != null) {
+        req.headers.addAll(headers);
+      }
+      
       try {
         final res = await req.send();
-
-/*         res.stream.transform(
-          StreamTransformer.fromHandlers(
-            handleData: (data, sink) {
-              sink.add(data);
-
-              byteCount += data.length;
-
-              if (onUploadProgress != null) {
-                onUploadProgress(byteCount, totalByteLength);
-                // CALL STATUS CALLBACK;
-              }
-            },
-            handleError: (error, stack, sink) {
-              throw error;
-            },
-            handleDone: (sink) {
-              sink.close();
-              // UPLOAD DONE;
-            },
-          ),
-        ); */
 
         return res.statusCode.toString();
       } catch (e) {
