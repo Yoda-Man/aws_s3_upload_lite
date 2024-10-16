@@ -1,3 +1,9 @@
+## [0.1.5]
+Add headers support and onProgress callback for other methods - 
+dhikshithrm
+
+Add support for sessionToken - chenqiongyao
+
 ## [0.1.4]
 Upload with progress Documentation. Updated dependencies
 
