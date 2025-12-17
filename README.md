@@ -28,6 +28,17 @@ dependencies:
   aws_s3_upload_lite: ^<latest-version>
 ```  
 
+## Security Warning ⚠️
+
+> [!WARNING]
+> **Never hardcode long-term AWS credentials (access key & secret key) in your mobile app.** 
+> These can be easily extracted by attackers.
+> 
+> **Recommended Approach:**
+> Use **Temporary Credentials** (AWS STS). Authenticate your user against your backend (e.g. Cognito), generate a temporary session, and pass the `sessionToken`, `accessKey`, and `secretKey` to this library.
+> 
+> The `sessionToken` parameter is supported specifically for this purpose.
+
 ## Upload a File
 
 Having created credentials on AWS, you can upload a file like this:

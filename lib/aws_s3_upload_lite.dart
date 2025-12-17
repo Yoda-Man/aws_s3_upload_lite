@@ -93,6 +93,9 @@ class AwsS3 {
 
   /// Upload a file, returning the full S3 file URL on success.
   static Future<String> uploadFile({
+    /// Optional HTTP client for testing
+    http.Client? client,
+
     /// AWS access key
     required String accessKey,
 
@@ -225,7 +228,11 @@ class AwsS3 {
         req.headers.addAll(headers);
       }
 
-      final res = await req.send();
+      final clientToSend = client ?? http.Client();
+      final res = await clientToSend.send(req);
+      if (client == null) {
+        clientToSend.close();
+      }
       return _handleResponse(res, fileUrl);
     } catch (e) {
       if (e is AwsS3UploadException) {
@@ -259,6 +266,9 @@ class AwsS3 {
   @Deprecated(
       'Use AwsS3.upload instead. This method will be removed in a future version.')
   static Future<String> uploadUint8List({
+    /// Optional HTTP client for testing
+    http.Client? client,
+
     /// AWS access key
     required String accessKey,
 
@@ -322,11 +332,15 @@ class AwsS3 {
       metadata: metadata,
       headers: headers,
       onUploadProgress: onUploadProgress,
+      client: client,
     );
   }
 
   /// Upload a Uint8List with progress, returning the full S3 file URL on success.
   static Future<String> upload({
+    /// Optional HTTP client for testing
+    http.Client? client,
+
     /// AWS access key
     required String accessKey,
 
@@ -463,7 +477,11 @@ class AwsS3 {
         req.headers.addAll(headers);
       }
 
-      final res = await req.send();
+      final clientToSend = client ?? http.Client();
+      final res = await clientToSend.send(req);
+      if (client == null) {
+        clientToSend.close();
+      }
       return _handleResponse(res, fileUrl);
     } catch (e) {
       if (e is AwsS3UploadException) {
